@@ -63,7 +63,25 @@ module.exports = {
   },
 
   async getByCategoria(request, response){
-  
+    try{
+      const {product_categoria} = request.query;
+      const result = await ProductModel.getByCategoria(product_categoria);
+            
+      //Nao deu certo rs
+      if(result == null){
+        return response.status(400).json({ notification : "Product not found"});
+      }
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product request failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to get Product by Categoria"
+      })
+    }
   },
 
 
