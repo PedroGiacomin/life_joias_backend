@@ -2,13 +2,14 @@ const ProductModel = require('../models/ProductModel');
 
 module.exports = {
 
-  //Criar novo produto
+  //Cria produto com JSON passado no body
+  //Retorna a 'product_id' do produto criado
   async create(request, response){
     try{
       
       const newProduct = request.body;
-      const result = await ProductModel.create(newProduct);  //Chama a funcao DO MODEL para criar no banco de dados
-      return response.status(200).json(result);    // O sqlite por padrao retorna o id quando cria
+      const result = await ProductModel.create(newProduct);  
+      return response.status(200).json(result);  
 
     }catch(error){
       console.warn("Product creation failed: ", error)
@@ -19,15 +20,13 @@ module.exports = {
     }
   },
 
-  //Att informacoes do produto
+  //Att informacoes do produto passado no params a partir de um JSON passado no body
   async update(request, response){
     try{
+      const {product_id} = request.params;
+      const newProduct = request.body;
 
-      //O id eh passado na rota como /:id 
-      const {produto_id} = request.params;
-      const newProduto = request.body;
-
-      await ProdutosModel.updateById(produto_id, newProduto);
+      await ProductModel.updateById(product_id, newProduct);
 
       return response.status(200).json({ "notification" : "Product updated successfully"});
 
@@ -35,7 +34,7 @@ module.exports = {
       console.warn("Product update failed: ", error)
       
       return response.status(500).json({
-        notification: "Internal server error while trying to update Produto"
+        notification: "Internal server error while trying to update Product"
       })
       
     }
