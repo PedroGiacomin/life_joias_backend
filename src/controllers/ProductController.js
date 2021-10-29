@@ -41,7 +41,25 @@ module.exports = {
   },
 
   async getById(request, response){
-  
+    try{
+      const {product_id} = request.params;
+      const result = await ProductModel.getById(product_id);
+
+      //Nao deu certo rs
+      if(result == []){
+        return response.status(400).json({ notification : "Product not found"});
+      }
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product request failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to get Produto"
+      })
+    }
   },
 
   async getByCategoria(request, response){
