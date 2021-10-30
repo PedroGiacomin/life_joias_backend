@@ -23,6 +23,16 @@ module.exports = {
   update: celebrate({
     [Segments.PARAMS]: Joi.object().keys({
       product_id : Joi.number().integer().required(), 
+    }),
+
+    [Segments.BODY]: Joi.object().keys({
+      product_nome : Joi.string().optional(),
+      product_preco : Joi.number().optional(),
+      product_tamanho : Joi.number().integer().optional(),
+      product_imagem : Joi.string().optional(),
+      product_descricao : Joi.string().optional(),
+      product_categoria : Joi.string().optional(),
+      product_subcategoria: Joi.string().optional()
     })
   }),
 
@@ -32,6 +42,11 @@ module.exports = {
     })
   }),
 
+  getByCategoria: celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+
+    })
+  })
 
 
   

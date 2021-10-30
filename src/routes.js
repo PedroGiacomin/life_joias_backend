@@ -40,7 +40,7 @@ routes.put('/products/:product_id', ProductValidator.update, ProductController.u
 routes.delete('/products/:product_id', ProductValidator.delete, ProductController.delete);
 
 //Pegam por query
-routes.get('/products', ProductController.getByCategoria);
+routes.get('/products', ProductValidator.getByCategoria, ProductController.getByCategoria);
 routes.get('/products', ProductController.getByCatSubcat);
 
 
