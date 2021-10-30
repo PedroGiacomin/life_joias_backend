@@ -8,6 +8,7 @@ const { errors } = require('celebrate');
 const port = process.env.PORT || 3333; 
 
 //Define o uso do cors, express e json
+require('dotenv').config();
 const app = express();
 
 app.use(cors());  
