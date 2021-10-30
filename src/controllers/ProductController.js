@@ -85,17 +85,17 @@ module.exports = {
   },
 
 
-  async getByCatSubcat(request, response){
+  async getByCategoriaWithFilter(request, response){
     try{
       const {product_categoria, product_subcategoria} = request.query;
-      const result = await ProductModel.getByCatSubcat({product_categoria, product_subcategoria});
+      const result = await ProductModel.getByCategoriaWithFilter(product_categoria, {product_subcategoria});
       
       //Nao deu certo rs
       if(result == null){
         return response.status(400).json({ notification : "Product not found"});
       }
 
-      //console.log(request.query);
+      console.log(request.query);
 
       return response.json(result);
 

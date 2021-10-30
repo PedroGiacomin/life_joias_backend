@@ -40,8 +40,10 @@ routes.put('/products/:product_id', ProductValidator.update, ProductController.u
 routes.delete('/products/:product_id', ProductValidator.delete, ProductController.delete);
 
 //Pegam por query
+//Gambiarra???????????
+routes.get('/products?*', ProductValidator.getByCategoriaWithFilter, ProductController.getByCategoriaWithFilter);
 routes.get('/products', ProductValidator.getByCategoria, ProductController.getByCategoria);
-routes.get('/products', ProductController.getByCatSubcat);
+
 
 
 //Clientes

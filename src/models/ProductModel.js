@@ -20,19 +20,19 @@ module.exports ={
   async getByCategoria(product_categoria){
     const result = await connection('product')
       .where({product_categoria})
-      .select('*');
+       .select('*');
 
-    return result;
-  },
+     return result;
+   },
 
   //Acha e retorna o produto por cat E subcat
-  async getByCatSubcat({ product_categoria, product_subcategoria}){
+  async getByCategoriaWithFilter(product_categoria, {product_subcategoria}){
     const result = await connection('product')
-      .where({
-        product_categoria, product_subcategoria
-      })
+      .where({  product_categoria })
+      .andWhere({ product_subcategoria })
       .select('*');
-    return result;
+
+    return result; 
   },
 
   async updateById(product_id, product){
