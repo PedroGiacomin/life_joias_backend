@@ -20,6 +20,18 @@ module.exports = {
     })
   }),
 
+  update: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      product_id : Joi.number().integer().required(), 
+    })
+  }),
+
+  delete: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      product_id : Joi.number().integer().required(), 
+    })
+  }),
+
 
 
   
