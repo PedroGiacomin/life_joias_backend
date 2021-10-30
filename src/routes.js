@@ -2,6 +2,7 @@ const express = require('express');
 const UserController = require('./controllers/UserController');
 const ProductController = require('./controllers/ProductController');
 
+const ProductValidator = require('./validators/ProductValidator')
 const routes = express.Router();
 /*
   
@@ -34,7 +35,7 @@ const routes = express.Router();
 
 //Produtos
 routes.get('/products/:product_id', ProductController.getById);
-routes.post('/products',  ProductController.create);
+routes.post('/products', ProductValidator.create, ProductController.create);
 routes.put('/products/:product_id',  ProductController.update);
 routes.delete('/products/:product_id',  ProductController.delete);
 
