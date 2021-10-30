@@ -2,6 +2,7 @@ const express = require('express');
 const UserController = require('./controllers/UserController');
 const ProductController = require('./controllers/ProductController');
 
+const ProductValidator = require('./validators/ProductValidator')
 const routes = express.Router();
 /*
   
@@ -33,14 +34,20 @@ const routes = express.Router();
  */ 
 
 //Produtos
-routes.get('/products/:product_id', ProductController.getById);
-routes.post('/products',  ProductController.create);
-routes.put('/products/:product_id',  ProductController.update);
-routes.delete('/products/:product_id',  ProductController.delete);
+routes.get('/products/:product_id', ProductValidator.getById, ProductController.getById);
+routes.post('/products', ProductValidator.create, ProductController.create);
+routes.put('/products/:product_id', ProductValidator.update, ProductController.update);
+routes.delete('/products/:product_id', ProductValidator.delete, ProductController.delete);
 
 //Pegam por query
-routes.get('/products', ProductController.getByCategoria);
-routes.get('/products', ProductController.getByCatSubcat);
+//Gambiarra???????????
+
+/** Na pratica, faz a rota usar a funcao COM filtro se tiver alguma coisa DIRETO depois de /products
+ * e SEM filtro se nao tiver nada  DIRETO depois de /products obg REGEX
+ */
+routes.get('/products?*', ProductValidator.getByCategoriaWithFilter, ProductController.getByCategoriaWithFilter);
+routes.get('/products', ProductValidator.getByCategoria, ProductController.getByCategoria);
+
 
 
 //Clientes

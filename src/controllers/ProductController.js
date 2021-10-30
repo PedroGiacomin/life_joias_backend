@@ -41,24 +41,93 @@ module.exports = {
   },
 
   async getById(request, response){
-  
+    try{
+      const {product_id} = request.params;
+      const result = await ProductModel.getById(product_id);
+
+      //Nao deu certo rs
+      if(result == []){
+        return response.status(400).json({ notification : "Product not found"});
+      }
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product request failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to get Produto"
+      })
+    }
   },
 
   async getByCategoria(request, response){
-  
+    try{
+      const {product_categoria} = request.query;
+      const result = await ProductModel.getByCategoria(product_categoria);
+            
+      //Nao deu certo rs
+      if(result == null){
+        return response.status(400).json({ notification : "Product not found"});
+      }
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product request failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to get Product by Categoria"
+      })
+    }
   },
 
 
-  async getByCatSubcat(request, response){
-  
-  },
+  async getByCategoriaWithFilter(request, response){
+    try{
+      const {product_categoria, product_subcategoria} = request.query;
+      const result = await ProductModel.getByCategoriaWithFilter(product_categoria, {product_subcategoria});
+      
+      //Nao deu certo rs
+      if(result == null){
+        return response.status(400).json({ notification : "Product not found"});
+      }
 
+      console.log(request.query);
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product request failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to get Product by Categoria and Subcategoria"
+      })
+    }
+  },
 
   async delete(request, response){
-  
+    try{
+      const {product_id} = request.params;
+      const result = await ProductModel.deleteById(product_id);
+            
+      //Nao deu certo rs
+      if(result == 0){
+        return response.status(400).json({ notification : "Product not found"});
+      }
+
+      return response.json(result);
+
+    }catch(error){
+
+      console.warn("Product deletion failed: ", error)
+      
+      return response.status(500).json({
+        notification: "Internal server error while trying to delete Product"
+      })
+    }
   }
-
-
-
-
 }
