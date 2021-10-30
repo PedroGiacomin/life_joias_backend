@@ -41,6 +41,10 @@ routes.delete('/products/:product_id', ProductValidator.delete, ProductControlle
 
 //Pegam por query
 //Gambiarra???????????
+
+/** Na pratica, faz a rota usar a funcao COM filtro se tiver alguma coisa DIRETO depois de /products
+ * e SEM filtro se nao tiver nada  DIRETO depois de /products obg REGEX
+ */
 routes.get('/products?*', ProductValidator.getByCategoriaWithFilter, ProductController.getByCategoriaWithFilter);
 routes.get('/products', ProductValidator.getByCategoria, ProductController.getByCategoria);
 
