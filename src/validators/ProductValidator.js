@@ -48,14 +48,5 @@ module.exports = {
       product_subcategoria: Joi.string().optional()
     })
   }),
-
-  getByCategoriaWithFilter: celebrate({
-    [Segments.QUERY]: Joi.object().keys({
-      product_categoria: Joi.string().optional(),
-      product_subcategoria: Joi.string().optional()
-    })
-  })
-
-
   
 }
