@@ -62,16 +62,19 @@ module.exports = {
     }
   },
 
+  //Filtro bem gambiarrado aqui
   async getByCategoria(request, response){
     try{
-      const {product_categoria} = request.query;
-      const result = await ProductModel.getByCategoria(product_categoria);
-            
-      //Nao deu certo rs
-      if(result == null){
-        return response.status(400).json({ notification : "Product not found"});
+      const {product_categoria, product_subcategoria} = request.query;
+      
+      let result = {};
+      if(typeof {product_categoria, product_subcategoria}['product_subcategoria'] == 'undefined'){
+        result = await ProductModel.getByCategoria(product_categoria);
       }
-
+      else{
+        result = await ProductModel.getByCategoriaWithFilter(product_categoria, {product_subcategoria});
+      }
+      
       return response.json(result);
 
     }catch(error){
@@ -80,31 +83,6 @@ module.exports = {
       
       return response.status(500).json({
         notification: "Internal server error while trying to get Product by Categoria"
-      })
-    }
-  },
-
-
-  async getByCategoriaWithFilter(request, response){
-    try{
-      const {product_categoria, product_subcategoria} = request.query;
-      const result = await ProductModel.getByCategoriaWithFilter(product_categoria, {product_subcategoria});
-      
-      //Nao deu certo rs
-      if(result == null){
-        return response.status(400).json({ notification : "Product not found"});
-      }
-
-      console.log(request.query);
-
-      return response.json(result);
-
-    }catch(error){
-
-      console.warn("Product request failed: ", error)
-      
-      return response.status(500).json({
-        notification: "Internal server error while trying to get Product by Categoria and Subcategoria"
       })
     }
   },
