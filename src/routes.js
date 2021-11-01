@@ -5,6 +5,8 @@ const ProductController = require('./controllers/ProductController');
 const ProductValidator = require('./validators/ProductValidator')
 const routes = express.Router();
 
+const auth = require("./middlewares/authentication");
+
 const SessionController = require("./controllers/SessionController");
 
 //session
@@ -55,5 +57,17 @@ routes.get('/users/:user_id', UserController.getById);
 routes.post('/users',  UserController.create);
 routes.put('/users/:user_id',  UserController.update);
 routes.delete('/users/:user_id', UserController.delete);
+
+//Note
+routes.get('/note', NoteValidator.getById, 
+auth.authenticateToken,
+NoteController.getById);
+routes.post('/note/:user_id', NoteValidator.create,
+auth.authenticateToken,
+NoteController.create);
+routes.put('/note/:note_id', 
+auth.authenticateToken,
+NoteValidator.update, NoteController.update);
+routes.delete('/note/:note_id', auth.authenticateToken, NoteValidator.delete, NoteController.delete);
 
 module.exports = routes;

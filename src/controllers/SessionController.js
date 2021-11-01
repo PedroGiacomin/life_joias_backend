@@ -8,10 +8,11 @@ module.exports = {
     try {
       const{ email, password } = request.body;
 
-      let uid;
+      let firebaseId;
       try {
-        uid = await Firebase.signIn(email, password);
+        firebaseId = await Firebase.login(email, password);
       } catch (error) {
+        console.warn(error);
         return response
         .status(403)
         .json({ notification: "Invalid Credentials"})
