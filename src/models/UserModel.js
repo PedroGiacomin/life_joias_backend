@@ -7,7 +7,7 @@ module.exports = {
   async create(user){
     
    const user_id = uuidv4();
-   user.id = user_id;
+   user.user_id = user_id;
 
    await connection('user').insert(user);
    
