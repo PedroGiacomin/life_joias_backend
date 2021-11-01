@@ -1,5 +1,6 @@
 const firebase = require('firebase/app');
 require('firebase/auth');
+require('firebase/firestore');
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,  
