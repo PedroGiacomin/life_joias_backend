@@ -8,18 +8,10 @@ module.exports = {
     try {
       const{ email, password } = request.body;
 
-<<<<<<< refs/remotes/origin/ProvLogin
-      let firebaseId;
-      try {
-        firebaseId = await Firebase.login(email, password);
-      } catch (error) {
-        console.warn(error);
-=======
       let uid;
       try {
         uid = await Firebase.signIn(email, password);
       } catch (error) {
->>>>>>> ProvLogin
         return response
         .status(403)
         .json({ notification: "Invalid Credentials"})
