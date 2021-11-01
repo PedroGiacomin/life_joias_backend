@@ -8,8 +8,11 @@ const UserValidator = require("./validators/UserValidator");
 const ProductValidator = require('./validators/ProductValidator')
 const routes = express.Router();
 
+<<<<<<< refs/remotes/origin/ProvLogin
 const auth = require("./middlewares/authentication");
 
+=======
+>>>>>>> ProvLogin
 const SessionController = require("./controllers/SessionController");
 
 //session
