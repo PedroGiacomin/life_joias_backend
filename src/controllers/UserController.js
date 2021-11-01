@@ -38,7 +38,7 @@ module.exports = {
   async getById(request, response){
    try{
       const {user_id} = request.params;
-      const result = await User.getById(user_id);
+      const result = await UserModel.getById(user_id);
 
       return response.status(200).json(result);
     }
