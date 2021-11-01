@@ -7,6 +7,7 @@ exports.up = function(knex) {
     table.string('user_telefone').notNullable();
     table.string('user_nascimento').notNullable();
     table.string('user_cep').notNullable();
+    table.string('user_rua').notNullable();
     table.string('user_numero').notNullable();
     table.string('user_bairro').notNullable();
     table.string('user_cidade').notNullable();

@@ -5,11 +5,13 @@ module.exports = {
   async create(request, response){
    try{
      const user = request.body;
+     console.log(user);
      const result = await UserModel.create(user);
+
      return response.status(200).json(result);
    }
-   catch (err){
-      console.log("User creation failed: " + err);
+   catch (error){
+      console.log("User creation failed: " + error);
       return response.status(500).json({
         notification: "Internal server error while trying to create User",
       });
@@ -25,8 +27,8 @@ module.exports = {
 
       return response.status(200).json(result);
     }
-    catch (err){
-      console.log("User update failed: " + err);
+    catch (error){
+      console.log("User update failed: " + error);
       return response.status(500).json({
         notification: "Internal serve error while trying to update User",
       });
@@ -40,8 +42,8 @@ module.exports = {
 
       return response.status(200).json(result);
     }
-    catch (err){
-      console.log("User getById failed: " + err);
+    catch (error){
+      console.log("User getById failed: " + error);
       return response.status(500).json({
         notification: "Internal server error while tryibg to get User",
       });
@@ -54,8 +56,8 @@ module.exports = {
       const result = await UserModel.deleteById(user_id);
       return response.status(200).json(result);
     }
-    catch (err){
-      console.log ("User delete failed: " + err);
+    catch (error){
+      console.log ("User delete failed: " + error);
       return response.status(500).json({
         notification: "Internal server error while trying to delete User",
       });
