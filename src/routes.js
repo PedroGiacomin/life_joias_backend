@@ -4,6 +4,13 @@ const ProductController = require('./controllers/ProductController');
 
 const ProductValidator = require('./validators/ProductValidator')
 const routes = express.Router();
+
+const SessionController = require("./controllers/SessionController");
+
+//session
+
+routes.post("/login", SessionController.singIn);
+
 /*
   
   {
