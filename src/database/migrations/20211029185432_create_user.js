@@ -12,7 +12,7 @@ exports.up = function(knex) {
     table.string('user_bairro').notNullable();
     table.string('user_cidade').notNullable();
     table.string('user_estado').notNullable();
-    table.string('user_senha').notNullable();  
+    table.string('firebase_id').notNullable();
   });
 };
 
