@@ -11,7 +11,11 @@ module.exports = {
       product_descricao : Joi.string().required(),
       product_categoria : Joi.string().required(),
       product_subcategoria: Joi.string().required()
-    }) 
+    }),
+    // [Segments.HEADERS]: Joi.object().keys({
+    //   authorization: Joi.string().required(),
+    // })
+    // .unknown(),
   }),
 
   getById: celebrate({

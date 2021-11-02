@@ -43,5 +43,13 @@ module.exports = {
       .where({user_id})
       .delete();
     return result;
+  },
+
+  async getByFields(fields) {
+    const result = await connection('user')
+      .where(fields)
+      .select("*")
+      .first();
+    return result;
   }
 }
