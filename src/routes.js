@@ -17,50 +17,21 @@ const SessionController = require("./controllers/SessionController");
 
 routes.post("/login", SessionController.signIn);
 
-/*
-  
-  {
-    "product_nome" : "Anel Splindow",
-    "product_preco" : 10.99,
-    "product_tamanho" : 15,
-    "product_imagem" : "./anel1.png",
-    "product_descricao" : "Anelzassooo",
-    "product_categoria" : "joia",
-    "product_subcategoria": "anel"
-  }
-
-  {
-    "user_nome" : "Zé Carlos",
-    "user_email" : "emaildozecarlos",
-    "user_telefone" : "999999999",
-    "user_nascimento" : "1999-03-12",
-    "user_cep" : "12345678",
-    "user_numero" : "456",
-    "user_bairro" : "Lagoa Grande",
-    "user_cidade": "Padimina",
-    "user_estado" : "Minas Gerais",
-    "user_senha": "batatinha123"
-  }
-  
-
- 
- */ 
-
 //Produtos
 routes.get('/products/:product_id', ProductValidator.getById, 
-auth.authenticateToken, 
+//auth.authenticateToken, 
 ProductController.getById);
 
 routes.post('/products', ProductValidator.create, 
-auth.authenticateToken, 
+//auth.authenticateToken, 
 ProductController.create);
 
 routes.put('/products/:product_id', ProductValidator.update, 
-auth.authenticateToken, 
+//auth.authenticateToken, 
 ProductController.update);
 
 routes.delete('/products/:product_id', ProductValidator.delete,
-auth.authenticateToken, 
+//auth.authenticateToken, 
 ProductController.delete);
 
 //Pega por query
