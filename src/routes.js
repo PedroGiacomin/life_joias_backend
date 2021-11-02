@@ -1,4 +1,7 @@
 const express = require('express');
+const routes = express.Router();
+
+const auth = require("./middlewares/authentication");
 
 const UserController = require('./controllers/UserController');
 const ProductController = require('./controllers/ProductController');
@@ -6,13 +9,13 @@ const ProductController = require('./controllers/ProductController');
  
 const UserValidator = require("./validators/UserValidator");
 const ProductValidator = require('./validators/ProductValidator')
-const routes = express.Router();
+
 
 const SessionController = require("./controllers/SessionController");
 
 //session
 
-routes.post("/login", SessionController.singIn);
+routes.post("/login", SessionController.signIn);
 
 /*
   
@@ -44,10 +47,21 @@ routes.post("/login", SessionController.singIn);
  */ 
 
 //Produtos
-routes.get('/products/:product_id', ProductValidator.getById, ProductController.getById);
-routes.post('/products', ProductValidator.create, ProductController.create);
-routes.put('/products/:product_id', ProductValidator.update, ProductController.update);
-routes.delete('/products/:product_id', ProductValidator.delete, ProductController.delete);
+routes.get('/products/:product_id', ProductValidator.getById, 
+auth.authenticateToken, 
+ProductController.getById);
+
+routes.post('/products', ProductValidator.create, 
+auth.authenticateToken, 
+ProductController.create);
+
+routes.put('/products/:product_id', ProductValidator.update, 
+auth.authenticateToken, 
+ProductController.update);
+
+routes.delete('/products/:product_id', ProductValidator.delete,
+auth.authenticateToken, 
+ProductController.delete);
 
 //Pega por query
 routes.get('/products', ProductValidator.getByCategoria, ProductController.getByCategoria);
@@ -59,16 +73,6 @@ routes.post('/users',  UserController.create);
 routes.put('/users/:user_id',  UserController.update);
 routes.delete('/users/:user_id', UserController.delete);
 
-//Note
-routes.get('/note', NoteValidator.getById, 
-auth.authenticateToken,
-NoteController.getById);
-routes.post('/note/:user_id', NoteValidator.create,
-auth.authenticateToken,
-NoteController.create);
-routes.put('/note/:note_id', 
-auth.authenticateToken,
-NoteValidator.update, NoteController.update);
-routes.delete('/note/:note_id', auth.authenticateToken, NoteValidator.delete, NoteController.delete);
+
 
 module.exports = routes;

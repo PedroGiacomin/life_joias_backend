@@ -1,20 +1,20 @@
 const Firebase = require("../utils/Firebase");
-const Usermodel = require("../models/UserModel");
-const Jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
 module.exports = {
-  async SVGTextPositioningElement(request, response){
+  async signIn(request, response){
     try {
       const{ email, password } = request.body;
-
-      let uid;
+      
+      let firebaseId;
       try {
-        uid = await Firebase.signIn(email, password);
+        firebaseId = await Firebase.login(email, password);
       } catch (error) {
+        console.warn(error);
         return response
         .status(403)
-        .json({ notification: "Invalid Credentials"})
+        .json({ notification: "Invalid Credentials"});
       }
 
       const user = await UserModel.getByFields({ firebase_id: fisebaseId });
