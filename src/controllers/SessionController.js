@@ -5,11 +5,11 @@ const UserModel = require("../models/UserModel");
 module.exports = { 
   async signIn(request, response){ 
     try { 
-      const{ email, password } = request.body; 
-       
+      const{ user_email, user_senha } = request.body; 
+      
       let firebaseId; 
       try { 
-        firebaseId = await Firebase.login(email, password); 
+        firebaseId = await Firebase.login(user_email, user_senha); 
       } catch (error) { 
         console.warn(error); 
         return response 
@@ -17,13 +17,13 @@ module.exports = {
         .json({ notification: "Invalid Credentials"}); 
       } 
  
-      const user = await UserModel.getByFields({ firebase_id: fisebaseId }); 
+      const user = await UserModel.getByFields({ firebase_id: firebaseId }); 
  
       const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET,{ 
         expiresIn: "30d", 
       }); 
  
-          
+           
     return response.status(200).json({ user, accessToken }); 
     } catch (error) { 
       return response 
