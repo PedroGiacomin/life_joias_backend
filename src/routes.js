@@ -37,7 +37,7 @@ routes.get('/products', ProductValidator.getByCategoria, ProductController.getBy
 //Clientes
 routes.get('/users/:user_id', 
   UserValidator.getById,
-  //auth.authenticateToken, 
+  auth.authenticateToken, 
   UserController.getById);
 
 routes.post('/users',  
@@ -46,12 +46,12 @@ routes.post('/users',
 
 routes.put('/users/:user_id',
   UserValidator.update,
-  //auth.authenticateToken,
+  auth.authenticateToken,
   UserController.update);
 
 routes.delete('/users/:user_id', 
   UserValidator.delete,
-  //auth.authenticateToken,
+  auth.authenticateToken,
   UserController.delete);
 
 module.exports = routes;
