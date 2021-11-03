@@ -19,15 +19,12 @@ routes.post("/login", SessionController.signIn);
 
 //Produtos
 routes.get('/products/:product_id', ProductValidator.getById, 
-//auth.authenticateToken, 
 ProductController.getById);
 
-routes.post('/products', ProductValidator.create, 
-//auth.authenticateToken, 
+routes.post('/products', ProductValidator.create,  
 ProductController.create);
 
 routes.put('/products/:product_id', ProductValidator.update, 
-//auth.authenticateToken, 
 ProductController.update);
 
 routes.delete('/products/:product_id', ProductValidator.delete,
@@ -39,10 +36,29 @@ routes.get('/products', ProductValidator.getByCategoria, ProductController.getBy
 
 
 //Clientes
-routes.get('/users/:user_id', UserController.getById);
-routes.post('/users',  UserController.create);
-routes.put('/users/:user_id',  UserController.update);
-routes.delete('/users/:user_id', UserController.delete);
+//Exige autenticacao
+routes.get('/users/:user_id',
+  UserValidator.getById, 
+  auth.authenticateToken, 
+  UserController.getById);
+
+routes.get('/users/:user_email',
+  //UserValidator.getById, 
+  //auth.authenticateToken, 
+  UserController.getByEmail);
+
+routes.post('/users', 
+  UserValidator.create, 
+  UserController.create);
+  
+routes.put('/users/:user_id', 
+  UserValidator.update, 
+  auth.authenticateToken, 
+  UserController.update);
+routes.delete('/users/:user_id', 
+  UserValidator.delete, 
+  auth.authenticateToken, 
+  UserController.delete);
 
 
 
