@@ -54,10 +54,14 @@ module.exports = {
   },
 
   async getByEmail(user_email){
+ 
+    console.log("User_email: ", user_email);
     const result = await connection('user')
       .where({user_email})
-      .select('*');
+      .select('*')
+      .first();
 
+      console.log("RESULT: ", result);
       return result;
   }
 }

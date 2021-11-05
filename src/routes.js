@@ -48,5 +48,4 @@ routes.get('/users',
   UserController.getByEmail);
 
 
-
 module.exports = routes;

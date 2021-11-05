@@ -58,9 +58,12 @@ module.exports = {
 
   async getByEmail(request, response){
     try{
-       const {user_email} = request.body;
-       const result = await UserModel.getByEmail(user_email);
- 
+      console.log(request.query);
+      
+      const {user_email} = request.query;
+      const result = await UserModel.getByEmail(user_email);
+      console.log(result);
+
        return response.status(200).json(result);
      }
      catch (error){
