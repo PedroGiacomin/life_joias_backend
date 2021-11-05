@@ -32,6 +32,7 @@ module.exports = {
     [Segments.BODY]: Joi.object().keys({
       product_nome : Joi.string().optional(),
       product_preco : Joi.number().optional(),
+      product_quantidade: Joi.number().optional(),
       product_tamanho : Joi.number().integer().optional(),
       product_imagem : Joi.string().optional(),
       product_descricao : Joi.string().optional(),

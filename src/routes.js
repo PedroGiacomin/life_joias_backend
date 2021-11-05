@@ -39,10 +39,10 @@ routes.get('/products', ProductValidator.getByCategoria, ProductController.getBy
 
 
 //Clientes
-routes.get('/users/:user_id', UserController.getById);
+routes.get('/users/:user_id', auth.authenticateToken, UserController.getById);
 routes.post('/users',  UserController.create);
-routes.put('/users/:user_id',  UserController.update);
-routes.delete('/users/:user_id', UserController.delete);
+routes.put('/users/:user_id', auth.authenticateToken, UserController.update);
+routes.delete('/users/:user_id',auth.authenticateToken, UserController.delete);
 
 
 
