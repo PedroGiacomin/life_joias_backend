@@ -18,13 +18,12 @@ module.exports = {
       } 
  
       const user = await UserModel.getByFields({ firebase_id: firebaseId }); 
- 
+      
       const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET,{ 
         expiresIn: "30d", 
       }); 
- 
            
-    return response.status(200).json({ user, accessToken }); 
+    return response.status(200).json({ user_email, accessToken }); 
     } catch (error) { 
       return response 
         .status(500) 
