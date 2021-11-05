@@ -56,6 +56,21 @@ module.exports = {
     }
   },
 
+  async getByEmail(request, response){
+    try{
+       const {user_email} = request.body;
+       const result = await UserModel.getByEmail(user_email);
+ 
+       return response.status(200).json(result);
+     }
+     catch (error){
+       console.log("User getByEmail failed: " + error);
+       return response.status(500).json({
+         notification: "Internal server error while trying to get User by email",
+       });
+     }
+   },
+
   async delete(request, response){
     try{
       const {user_id} = request.params;

@@ -43,6 +43,9 @@ routes.get('/users/:user_id', auth.authenticateToken, UserController.getById);
 routes.post('/users',  UserController.create);
 routes.put('/users/:user_id', auth.authenticateToken, UserController.update);
 routes.delete('/users/:user_id',auth.authenticateToken, UserController.delete);
+routes.get('/users', 
+  //auth.authenticateToken, 
+  UserController.getByEmail);
 
 
 

@@ -51,5 +51,13 @@ module.exports = {
       .select("*")
       .first();
     return result;
+  },
+
+  async getByEmail(user_email){
+    const result = await connection('user')
+      .where({user_email})
+      .select('*');
+
+      return result;
   }
 }
